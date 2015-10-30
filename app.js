@@ -18,10 +18,10 @@ weatherApp.config(function ($routeProvider) {
 
 });
 
-// Service
+// Services
 weatherApp.service('cityService', function() {
 
-	this.city = '';
+	this.city = 'London, UK';
 
 });
 
@@ -29,6 +29,10 @@ weatherApp.service('cityService', function() {
 weatherApp.controller('mainController', ['$scope', 'cityService', function($scope, cityService) {
 
 	$scope.city = cityService.city;
+
+	$scope.$watch('city', function() {
+		cityService.city = $scope.city;
+	});
 
 
 }]);
