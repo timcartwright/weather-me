@@ -62,3 +62,23 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
 	}
 
 }]);
+
+weatherApp.directive('forecast', function() {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'directives/forecast.html',
+		replace: true,
+		scope: {
+			weatherObject: '=',
+			convertToDate: '&',
+			convertToStandard: '&',
+			dateFormat: "@"
+		}
+		
+
+	}
+
+
+});
+
