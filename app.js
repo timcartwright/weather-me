@@ -66,7 +66,7 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
 weatherApp.directive('forecast', function() {
 
 	return {
-		templateUrl: 'directives/forecast.html',
+		templateUrl: 'directives/weather.html',
 		replace: true,
 		scope: {
 			weatherObject: '=',
