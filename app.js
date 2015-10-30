@@ -46,6 +46,12 @@ weatherApp.controller('forecastController', ['$scope', '$resource', 'cityService
 
 	$scope.weatherResult = $scope.weatherAPI.get({ q: $scope.city, cnt: 2, appid: '559996506353df37f3c44075a8662dda' });
 
-	console.log($scope.weatherResult);
+	$scope.convertToCentigrade = function(degK) {
+		return Math.round(degK - 273.15);
+	}
+
+	$scope.convertToDate = function(dt) {
+		return new Date(dt * 1000);
+	}
 
 }]);
