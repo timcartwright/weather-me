@@ -31,7 +31,7 @@ weatherApp.service('cityService', function() {
 });
 
 // Controllers
-weatherApp.controller('mainController', ['$scope', '$location' 'cityService', function($scope, $location, cityService) {
+weatherApp.controller('mainController', ['$scope', '$location', 'cityService', function($scope, $location, cityService) {
 
 	$scope.city = cityService.city;
 
@@ -56,6 +56,8 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
 	$scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", { callback: "JSON_CALLBACK" }, {get: {method: "JSONP"}});
 
 	$scope.weatherResult = $scope.weatherAPI.get({ q: $scope.city, cnt: $scope.days, appid: '559996506353df37f3c44075a8662dda' });
+
+	console.log($scope.weatherResult);
 
 	$scope.convertToCentigrade = function(degK) {
 		return Math.round(degK - 273.15);
