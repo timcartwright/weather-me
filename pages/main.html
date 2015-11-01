@@ -1,11 +1,14 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<h4>I Want the Weather for</h4>
+		<h4>What Should I Wear</h4>
 		<form ng-submit="submit()">
 			<div class="form-group">
-				<input type="text" class="form-control" ng-model="city">
+				<input type="text" class="form-control" ng-model="city" ng-autocomplete options="options" details="details" lat="lat" lng="lng">
 			</div>
-			<button type="submit" class="btn btn-primary" value="Gimme the Weather!">Gimme the Weather!</button>
+			<button type="submit" class="btn btn-primary" value="Gimme the Weather!">Tell Me Now!</button>
 		</form>
 	</div>
 </div>
+
+<div ng-model="lat"></div>
+

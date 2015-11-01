@@ -1,8 +1,20 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">{{ convertToDate({ dt: weatherObject.dt}) | date: dateFormat }}</h3>
+<div class="col-md-8 col-md-offset-2">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>{{ brolly ({ chance: weatherObject.precipProbability, intensity: weatherObject.precipIntensity }) }}</h2>
+			<p>{{ weatherObject.precipIntensity }}</p>
+		</div>
+
+		<div class="col-md-6">
+			<h2>{{ shades ({ cloud: weatherObject.cloudCover }) }}</h2>
+			<p>{{ weatherObject.cloudCover }}</p>	
+		</div>
 	</div>
-	<div class="panel-body">
-		Daytime temperature: {{ convertToStandard({ daytimeTemp: weatherObject.temp.day }) }}
+
+	<div class="row">
+		<div class="col-md-12">
+				<h2>{{ jacket({ temp: weatherObject.apparentTemperature}) }}</h2>
+				<p>{{ weatherObject.apparentTemperature }}</p>		
+		</div>
 	</div>
 </div>

@@ -1,11 +1,10 @@
-<h2>Forecast for {{ city }}</h2>
+<h2>Do I Need a Jacket or Shades in {{ city }}</h2>
 <hr />
-Days: <a href="#/forecast/2" ng-class="{ 'bg-primary': days === '2' }">2</a> | <a href="#/forecast/5" ng-class="{ 'bg-primary': days === '5' }">5</a> | <a href="#/forecast/7" ng-class="{ 'bg-primary': days === '7' }">7</a>
-<hr />
-<div ng-repeat="w in weatherResult.list">
-	<div class="row">
-		<div class="col-md-12">
-			<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-standard="convertToCentigrade(daytimeTemp)" date-format="EEEE"></forecast>
-		</div>
+<div class="row">
+<div ng-repeat="w in weatherResult.hourly.data | limitTo: 1">
+	
+		
+			<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-standard="convertToCentigrade(daytimeTemp)" date-format="h a" jacket="jacketNoJacket(temp)" shades="shadesNoShades(cloud)" brolly="brollyNoBrolly(chance, intensity)"></forecast>
+		
 	</div>
 </div>
