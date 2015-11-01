@@ -1,2 +1,2 @@
 // Module
-var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource', 'ngAutocomplete']);
+var weatherApp = angular.module('weatherApp', ['ngResource', 'ngAutocomplete']);

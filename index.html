@@ -8,12 +8,12 @@
 	</style>
 
 	<script src="https://code.angularjs.org/1.4.7/angular.js"></script>
-	<script src="https://code.angularjs.org/1.4.7/angular-route.min.js"></script>
+	
 	<script src="https://code.angularjs.org/1.4.7/angular-resource.min.js"></script>
 	<script src="ngAutocomplete.js"></script>
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 	<script src="app.js"></script>
-	<script src="routes.js"></script>
+	
 	<script src="services.js"></script>
 	<script src="controllers.js"></script>
 	<script src="directives.js"></script>
@@ -24,10 +24,28 @@
 
 	
 	
-	<main>
-		<div class="container">
-			
-				<div ng-view></div>
+	<main ng-controller="mainController">
+		<div class="container">		
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<h4>What Should I Wear</h4>
+					
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="city" ng-autocomplete options="options" details="details" lat="lat" lng="lng">
+						</div>
+						
+					
+				</div>
+			</div>
+
+			<div ng-model="lat"></div>
+
+			<hr />
+			<div class="row">
+				<div ng-repeat="w in weatherResult.hourly.data | limitTo: 1">
+					<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-standard="convertToCentigrade(daytimeTemp)" date-format="h a" jacket="jacketNoJacket(temp)" shades="shadesNoShades(cloud)" brolly="brollyNoBrolly(chance, intensity)"></forecast>		
+				</div>
+			</div>
 			
 		</div>
 	</main>

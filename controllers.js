@@ -1,37 +1,26 @@
 // Controllers
-weatherApp.controller('mainController', ['$scope', '$location', 'cityService', function($scope, $location, cityService) {
+weatherApp.controller('mainController', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService) {
 
-	$scope.city = cityService.city;
-	$scope.lat = cityService.lat;
-	$scope.lng = cityService.lng;
+
 
 	// Options for ngAutocomplete
 	$scope.options = {};
 	$scope.options.types = "(cities)";
 
-	$scope.$watch('city', function() {
-		cityService.city = $scope.city;
-	});
+	$scope.lat = 51.52;
+	$scope.lng = 0;
 
 	$scope.$watch('lat', function() {
-		cityService.lat = $scope.lat;
-		cityService.lng = $scope.lng;
+		$scope.weatherAPI = $resource("https://api.forecast.io/forecast/8ce6c9b19b79a81db3d5c9428983b2c3/" + $scope.lat + "," + $scope.lng, { callback: "JSON_CALLBACK" }, {get: {method: "JSONP"}});
+
+		$scope.weatherResult = $scope.weatherAPI.get();
+
+		console.log($scope.weatherResult);
 	});
 
-	$scope.submit = function() {
-		$location.path("/forecast");
-	}
-
-}]);
 
 
-weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParams', 'cityService', function($scope, $resource, $routeParams, cityService) {
-
-	$scope.city = cityService.city;
-	$scope.lat = cityService.lat;
-	$scope.lng = cityService.lng;
-
-	$scope.days = $routeParams.days * 8 || '40';
+	// $scope.days = $routeParams.days * 8 || '40';
 
 	$scope.weatherAPI = $resource("https://api.forecast.io/forecast/8ce6c9b19b79a81db3d5c9428983b2c3/" + $scope.lat + "," + $scope.lng, { callback: "JSON_CALLBACK" }, {get: {method: "JSONP"}});
 
@@ -112,5 +101,26 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
 		return foo;
 
 	};
+
+	// Get Location
+
+	angular.element(document).ready(function () {
+        getLocation();
+    });
+
+    
+    function getLocation() {
+	    if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(showPosition);
+	    } else {
+	        x.innerHTML = "Geolocation is not supported by this browser.";
+	    }
+	}
+
+	function showPosition(position) {
+	     $scope.lat = position.coords.latitude;
+	     $scope.lng = position.coords.longitude;
+	     console.log($scope.lat);
+	}
 
 }]);
