@@ -1,32 +1,21 @@
 // Controllers
 weatherApp.controller('mainController', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService) {
 
-
+	// Get User's Location
+	angular.element(document).ready(function () {
+        getLocation();
+    });
 
 	// Options for ngAutocomplete
 	$scope.options = {};
 	$scope.options.types = "(cities)";
 
-	$scope.lat = 51.52;
-	$scope.lng = 0;
-
+	// Watch for changes to 'lat'
 	$scope.$watch('lat', function() {
-		$scope.weatherAPI = $resource("https://api.forecast.io/forecast/8ce6c9b19b79a81db3d5c9428983b2c3/" + $scope.lat + "," + $scope.lng, { callback: "JSON_CALLBACK" }, {get: {method: "JSONP"}});
-
-		$scope.weatherResult = $scope.weatherAPI.get();
-
-		console.log($scope.weatherResult);
-	});
-
-
-
-	// $scope.days = $routeParams.days * 8 || '40';
-
-	$scope.weatherAPI = $resource("https://api.forecast.io/forecast/8ce6c9b19b79a81db3d5c9428983b2c3/" + $scope.lat + "," + $scope.lng, { callback: "JSON_CALLBACK" }, {get: {method: "JSONP"}});
-
-	$scope.weatherResult = $scope.weatherAPI.get();
-
-	console.log($scope.weatherResult);
+		if ($scope.lat) {
+			getWeather();
+		};
+	});	
 
 	$scope.convertToCentigrade = function(degK) {
 		return Math.round(degK - 273.15);
@@ -102,25 +91,26 @@ weatherApp.controller('mainController', ['$scope', '$resource', 'cityService', f
 
 	};
 
-	// Get Location
 
-	angular.element(document).ready(function () {
-        getLocation();
-    });
-
+	function getWeather() {
+		$scope.weatherAPI = $resource("https://api.forecast.io/forecast/8ce6c9b19b79a81db3d5c9428983b2c3/" + $scope.lat + "," + $scope.lng, { callback: "JSON_CALLBACK" }, {get: {method: "JSONP"}});
+		$scope.weatherResult = $scope.weatherAPI.get();
+	};
     
     function getLocation() {
 	    if (navigator.geolocation) {
 	        navigator.geolocation.getCurrentPosition(showPosition);
 	    } else {
-	        x.innerHTML = "Geolocation is not supported by this browser.";
-	    }
-	}
+	        $scope.lat = 16.7758;
+	        $scope.lng = -3.0094;
+	        getWeather();
+	    }    
+	};
 
 	function showPosition(position) {
 	     $scope.lat = position.coords.latitude;
 	     $scope.lng = position.coords.longitude;
-	     console.log($scope.lat);
-	}
+	     getWeather();
+	};
 
 }]);
