@@ -3,9 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-	<style>
 	
-	</style>
+	
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
 	<script src="https://code.angularjs.org/1.4.7/angular.js"></script>
 	
@@ -18,17 +20,17 @@
 	<script src="controllers.js"></script>
 	<script src="directives.js"></script>
 
-	<title>Jacket or Shades</title>
+	<title>Brolly or Shades</title>
 </head>
 <body>
-
+	<div class="content-wrapper">
 	
 	
 	<main ng-controller="mainController">
 		<div class="container">		
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<h4>What Should I Wear</h4>
+					<h1>Brolly or Shades?</h1>
 					
 						<div class="form-group">
 							<input type="text" class="form-control" ng-model="city" ng-autocomplete options="options" details="details" lat="lat" lng="lng">
@@ -40,10 +42,12 @@
 
 			<div ng-model="lat"></div>
 
-			<hr />
+		
 			<div class="row">
 				<div ng-repeat="w in weatherResult.hourly.data | limitTo: 1">
-					<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-standard="convertToCentigrade(daytimeTemp)" date-format="h a" jacket="jacketNoJacket(temp)" shades="shadesNoShades(cloud)" brolly="brollyNoBrolly(chance, intensity)"></forecast>		
+					<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-centigrade="fahrenheitToCentigrade(daytimeTemp)" date-format="h a" jacket="jacketNoJacket(temp)" shades="shadesNoShades(cloud)" brolly="brollyNoBrolly(chance, intensity)"></forecast>
+					
+					
 				</div>
 			</div>
 			
@@ -53,6 +57,8 @@
 	<footer>
 		
 	</footer>
+
+	</div>
 
 </body>
 </html>

@@ -2,19 +2,34 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h2>{{ brolly ({ chance: weatherObject.precipProbability, intensity: weatherObject.precipIntensity }) }}</h2>
-			<p>{{ weatherObject.precipIntensity }}</p>
+			
 		</div>
 
 		<div class="col-md-6">
 			<h2>{{ shades ({ cloud: weatherObject.cloudCover }) }}</h2>
-			<p>{{ weatherObject.cloudCover }}</p>	
+				
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-12">
 				<h2>{{ jacket({ temp: weatherObject.apparentTemperature}) }}</h2>
-				<p>{{ weatherObject.apparentTemperature }}</p>		
+					
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Why?</a>
+
+			<div class="collapse" id="collapseExample">
+			  <div class="well">
+			   <p>Chance of Rain is {{ weatherObject.precipProbability * 100 }}%</p>
+			   <p>Cloud Cover is {{ weatherObject.cloudCover * 100 }}%</p>
+			   <p>Apparent Temperature is {{ weatherObject.apparentTemperature }}</p>	
+
+			  </div>
+			</div>	
 		</div>
 	</div>
 </div>

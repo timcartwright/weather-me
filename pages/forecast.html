@@ -2,6 +2,6 @@
 <hr />
 <div class="row">
 	<div ng-repeat="w in weatherResult.hourly.data | limitTo: 1">
-			<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-standard="convertToCentigrade(daytimeTemp)" date-format="h a" jacket="jacketNoJacket(temp)" shades="shadesNoShades(cloud)" brolly="brollyNoBrolly(chance, intensity)"></forecast>
+			<forecast weather-object="w" convert-to-date="convertToDate(dt)" convert-to-standard="fahrenheitToCentigrade(daytimeTemp)" date-format="h a" jacket="jacketNoJacket(temp)" shades="shadesNoShades(cloud)" brolly="brollyNoBrolly(chance, intensity)"></forecast>
 	</div>
 </div>
